@@ -62,19 +62,30 @@
             line-height: 1.6;
         }
 
+        /* Tap-to-call / Email Links */
+        .contact-details a {
+            color: #00FF41;
+            text-decoration: none;
+            transition: text-shadow 0.3s ease;
+        }
+        
+        .contact-details a:hover {
+            text-shadow: 0 0 10px #00FF41;
+        }
+
         .services {
             margin-top: 25px;
-            color: #888;
-            font-size: 0.85rem;
+            color: #E0FFE0; /* Brighter pale green for better readability */
+            font-size: 0.95rem; /* Slightly larger */
             text-transform: uppercase;
             border-top: 1px solid #333;
             padding-top: 20px;
+            line-height: 1.6;
         }
         
         /* Matrix Button Styles */
         .ebay-btn {
             display: inline-block;
-            margin-top: 25px;
             padding: 12px 25px;
             color: #00FF41;
             border: 1px solid #00FF41;
@@ -83,14 +94,47 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 12px rgba(0, 255, 65, 0.4), inset 0 0 8px rgba(0, 255, 65, 0.2); /* Permanent subtle glow */
             cursor: pointer;
         }
         
         .ebay-btn:hover {
             background-color: #00FF41;
             color: black;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.5); /* Intense hover glow */
+            font-weight: bold;
+        }
+
+        /* Typewriter Animation Footer */
+        .footer-status {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .typewriter {
+            color: #00FF41;
+            font-size: 0.8rem;
+            opacity: 0.8;
+            overflow: hidden; 
+            white-space: nowrap;
+            margin: 0;
+            letter-spacing: 2px;
+            border-right: .15em solid #00FF41; /* The blinking cursor */
+            /* 36ch is exactly the width of the characters so it types out perfectly */
+            animation: typing 3s steps(36, end), blink-caret .8s step-end infinite;
+        }
+
+        /* Keyframes for the typewriter typing effect */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 36ch; } 
+        }
+
+        /* Keyframes for the blinking cursor */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00FF41; }
         }
     </style>
 </head>
@@ -103,31 +147,41 @@
         <div class="tagline">TECH EXCHANGE LLC</div>
         
         <div class="contact-details">
-            (985) 244-3210 <br>
-            Carl@SentinelTechExchange.com <br>
+            <a href="tel:9852443210">(985) 244-3210</a> <br>
+            <a href="mailto:Carl@SentinelTechExchange.com">Carl@SentinelTechExchange.com</a> <br>
             Bourg, Louisiana
         </div>
 
         <div class="services">
             [ BUY • SELL • TRADE • REPAIR ] <br>
-            Laptops • Workstations • Networking • Data Recovery
+            Laptops • Workstations • Networking • Overheating Fixes (Repasting)
         </div>
         
-        <!-- eBay Storefront Button -->
-        <a href="https://www.ebay.com/usr/sentineltechexchange" target="_blank" class="ebay-btn">
-            [ BROWSE OUR EBAY STORE ]
-        </a>
+        <!-- Action Buttons -->
+        <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 25px;">
+            <a href="https://www.ebay.com/usr/sentineltechexchange" target="_blank" class="ebay-btn" style="margin-top: 0;">
+                [ BROWSE OUR EBAY STORE ]
+            </a>
+            
+            <a href="https://www.facebook.com/marketplace/profile/69302797/" target="_blank" class="ebay-btn" style="margin-top: 0;">
+                [ LOCAL FACEBOOK MARKETPLACE ]
+            </a>
+            
+            <a href="https://www.google.com/maps/search/?api=1&query=Subway+Bourg+LA&query_place_id=ChIJo3vou30CIYYRP-IZrrbLmbg" target="_blank" class="ebay-btn" style="margin-top: 0;">
+                [ DROP-OFF DIRECTIONS ]
+            </a>
+        </div>
         
-        <p style="color: #00FF41; font-size: 0.7rem; margin-top: 20px; opacity: 0.6;">
-            CONNECTION: SECURE | STATUS: ONLINE
-        </p>
+        <div class="footer-status">
+            <p class="typewriter">CONNECTION: SECURE | STATUS: ONLINE</p>
+        </div>
     </div>
 
     <script>
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
 
-        // Function to set canvas to exactly the size of the window
+        // Function to set canvas to exactly the window size
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
