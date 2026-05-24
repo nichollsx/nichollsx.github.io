@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Tech Exchange | Professional Hardware & Repair</title>
+    <style>
+        /* Force full screen and hide scrollbars */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* The background layer */
+        #matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+        }
+
+        /* The text layer */
+        .content-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.85); /* Semi-transparent black box */
+            border: 2px solid #00FF41;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+        }
+
+        h1 {
+            color: #00FF41;
+            font-size: clamp(2rem, 8vw, 4rem);
+            margin: 0;
+            letter-spacing: 12px;
+            text-shadow: 0 0 10px #00FF41;
+        }
+
+        .tagline {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            letter-spacing: 4px;
+        }
+
+        .contact-details {
+            margin-top: 30px;
+            color: #00FF41;
+            font-size: 1.4rem;
+            line-height: 1.6;
+        }
+
+        .services {
+            margin-top: 25px;
+            color: #888;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix"></canvas>
+
+    <div class="content-overlay">
+        <h1>SENTINEL</h1>
+        <div class="tagline">TECH EXCHANGE LLC</div>
+        
+        <div class="contact-details">
+            (985) 244-3210 <br>
+            Carl@SentinelTechExchange.com <br>
+            Bourg, Louisiana
+        </div>
+
+        <div class="services">
+            [ BUY • SELL • TRADE • REPAIR ] <br>
+            Laptops • Workstations • Networking • Data Recovery
+        </div>
+        
+        <p style="color: #00FF41; font-size: 0.7rem; margin-top: 20px; opacity: 0.6;">
+            CONNECTION: SECURE | STATUS: ONLINE
+        </p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        // Function to set canvas to exactly the size of the window
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array.from({ length: Math.ceil(columns) }).fill(1);
+
+        function drawRain() {
+            // This creates the fade effect
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#00FF41";
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = symbols.charAt(Math.floor(Math.random() * symbols.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawRain, 35);
+    </script>
+</body>
+</html>
